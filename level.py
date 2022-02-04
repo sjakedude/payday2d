@@ -32,4 +32,5 @@ class Level:
         self.tiles.draw(self.display_surface)
 
         # tiles
+        self.player.update()
         self.player.draw(self.display_surface)
