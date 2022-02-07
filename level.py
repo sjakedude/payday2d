@@ -2,6 +2,7 @@ import pygame
 from tiles import Tile
 from settings import tile_size
 from player import Player
+from police import Police
 
 
 class Level:
@@ -13,6 +14,7 @@ class Level:
     def setup_level(self, layout):
         self.tiles = pygame.sprite.Group()
         self.player = pygame.sprite.GroupSingle()
+        self.police = pygame.sprite.GroupSingle()
 
         for row_index, row in enumerate(layout):
             for col_index, cell in enumerate(row):
@@ -24,6 +26,9 @@ class Level:
                 if cell == "2":
                     player_sprite = Player((x, y))
                     self.player.add(player_sprite)
+                if cell == "3":
+                    police_sprite = Police((x, y))
+                    self.police.add(police_sprite)
 
     def horizontal_movement_collision(self):
         player = self.player.sprite
@@ -42,6 +47,10 @@ class Level:
                 elif player.direction.y > 0:
                     player.rect.bottom = sprite.rect.top
 
+    def police_movement(self):
+        police = self.police.sprite
+        police.rect.x += police.direction.x * police.speed
+
     def run(self):
 
         # level tiles
@@ -52,3 +61,8 @@ class Level:
         self.player.update()
         self.horizontal_movement_collision()
         self.player.draw(self.display_surface)
+
+        # police
+        self.police.update()
+        self.police_movement()
+        self.police.draw(self.display_surface)
