@@ -19,7 +19,7 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-        WIN.fill("black")
+        WIN.fill("grey")
         level.run()
         pygame.display.update()
         clock.tick(60)
