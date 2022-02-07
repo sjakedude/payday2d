@@ -11,6 +11,7 @@ clock = pygame.time.Clock()
 level = Level(level_map, WIN)
 FPS = 60
 
+
 def main():
     running = True
     while running:

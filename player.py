@@ -1,13 +1,15 @@
 import pygame
 
+
 class Player(pygame.sprite.Sprite):
     def __init__(self, pos):
         super().__init__()
-        self.image = pygame.transform.scale(pygame.image.load("assets/player.png"), (50, 50))
-        self.rect = self.image.get_rect(topleft = pos)
+        self.image = pygame.transform.scale(
+            pygame.image.load("assets/player.png"), (50, 50)
+        )
+        self.rect = self.image.get_rect(topleft=pos)
         self.direction = pygame.math.Vector2(0, 0)
         self.speed = 3
-
 
     def get_input(self):
         keys = pygame.key.get_pressed()
@@ -30,5 +32,3 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
         self.get_input()
-        self.rect.x += self.direction.x * self.speed
-        self.rect.y += self.direction.y * self.speed
