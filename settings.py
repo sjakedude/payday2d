@@ -17,8 +17,9 @@ level_map = [
     "XXXXXXXX  XXXXXX  XX  XXXX  ",
 ]
 
-level_map = LevelParser(600, 600)
 
-tile_size = 60
+level_map = LevelParser(600, 600).load_map()
+
+tile_size = 6
 screen_width = 600
 screen_height = 600

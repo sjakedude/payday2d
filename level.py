@@ -18,10 +18,10 @@ class Level:
             for col_index, cell in enumerate(row):
                 x = col_index * tile_size
                 y = row_index * tile_size
-                if cell == "X":
+                if cell == "1":
                     tile = Tile((x, y), tile_size)
                     self.tiles.add(tile)
-                if cell == "P":
+                if cell == "2":
                     player_sprite = Player((x, y))
                     self.player.add(player_sprite)
 

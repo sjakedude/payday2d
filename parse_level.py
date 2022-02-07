@@ -9,27 +9,14 @@ class LevelParser:
         self.map = self.load_map()
 
     def remove_new_line_characters(self, line):
-        line = line.replace(r"\n", "")
+        line = line.replace(r"\n", "").replace("0", " ")
         return line
 
     def load_map(self):
-        rects = []
+        level_map = []
         with open("levels/bank.dat") as file:
             lines = file.readlines()
-        row = 0
-        column = 0
         for line in lines:
             line = self.remove_new_line_characters(line)
-            for item in line:
-                if item == "1":
-                    rect = pygame.Rect(
-                        column * self.column_factor,
-                        row * self.row_factor,
-                        self.column_factor,
-                        self.row_factor,
-                    )
-                    rects.append(rect)
-                column += 1
-            column = 0
-            row += 1
-        return rects
+            level_map.append(line)
+        return level_map
