@@ -35,7 +35,7 @@ class Player(pygame.sprite.Sprite):
             self.direction.x = 0
             self.direction.y = 0
 
-    def get_mouse_pointer(self):
+    def get_player_orientation(self):
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_UP]:
@@ -50,4 +50,4 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
         self.get_input()
-        self.get_mouse_pointer()
+        self.get_player_orientation()
