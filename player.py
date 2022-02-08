@@ -11,7 +11,7 @@ class Player(pygame.sprite.Sprite):
         self.image_original = pygame.transform.scale(
             pygame.image.load("assets/player.png"), (50, 50)
         )
-        self.rect = self.image.get_rect(center=pos)
+        self.rect = self.image.get_rect(topleft=pos)
         self.position = pos
         self.direction = pygame.math.Vector2(0, 0)
         self.speed = 3
@@ -36,12 +36,17 @@ class Player(pygame.sprite.Sprite):
             self.direction.y = 0
 
     def get_mouse_pointer(self):
-        mouse_x, mouse_y = pygame.mouse.get_pos()
-        rel_x, rel_y = mouse_x - (self.rect.x + (self.rect.width / 2)), mouse_y - (self.rect.y + (self.rect.height / 2))
-        angle = math.atan2(rel_y, rel_x)
-        angle = (180 / math.pi) * -math.atan2(rel_y, rel_x)
-        self.image = pygame.transform.rotate(self.image_original, int(angle))
-       #self.rect = self.image.get_rect(center=self.position)
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_UP]:
+            self.image = pygame.transform.rotate(self.image_original, 90)
+        elif keys[pygame.K_DOWN]:
+            self.image = pygame.transform.rotate(self.image_original, -90)
+        elif keys[pygame.K_LEFT]:
+            self.image = pygame.transform.rotate(self.image_original, 180)
+        elif keys[pygame.K_RIGHT]:
+            self.image = pygame.transform.rotate(self.image_original, 0)
+
 
     def update(self):
         self.get_input()
