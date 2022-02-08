@@ -1,4 +1,5 @@
 import pygame
+import math
 
 
 class Player(pygame.sprite.Sprite):
@@ -7,7 +8,11 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(
             pygame.image.load("assets/player.png"), (50, 50)
         )
+        self.image_original = pygame.transform.scale(
+            pygame.image.load("assets/player.png"), (50, 50)
+        )
         self.rect = self.image.get_rect(topleft=pos)
+        self.position = pos
         self.direction = pygame.math.Vector2(0, 0)
         self.speed = 3
 
@@ -30,5 +35,19 @@ class Player(pygame.sprite.Sprite):
             self.direction.x = 0
             self.direction.y = 0
 
+    def get_player_orientation(self):
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_UP]:
+            self.image = pygame.transform.rotate(self.image_original, 90)
+        elif keys[pygame.K_DOWN]:
+            self.image = pygame.transform.rotate(self.image_original, -90)
+        elif keys[pygame.K_LEFT]:
+            self.image = pygame.transform.rotate(self.image_original, 180)
+        elif keys[pygame.K_RIGHT]:
+            self.image = pygame.transform.rotate(self.image_original, 0)
+
+
     def update(self):
         self.get_input()
+        self.get_player_orientation()
