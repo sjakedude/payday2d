@@ -15,6 +15,7 @@ class Level:
         self.tiles = pygame.sprite.Group()
         self.player = pygame.sprite.GroupSingle()
         self.police = pygame.sprite.GroupSingle()
+        self.bullet = pygame.sprite.GroupSingle()
 
         for row_index, row in enumerate(layout):
             for col_index, cell in enumerate(row):
@@ -30,7 +31,7 @@ class Level:
                     police_sprite = Police((x, y))
                     self.police.add(police_sprite)
 
-    def horizontal_movement_collision(self):
+    def movement_collision(self):
         player = self.player.sprite
 
         player.rect.x += player.direction.x * player.speed
@@ -59,10 +60,13 @@ class Level:
 
         # player
         self.player.update()
-        self.horizontal_movement_collision()
+        self.movement_collision()
         self.player.draw(self.display_surface)
 
         # police
         self.police.update()
         self.police_movement()
         self.police.draw(self.display_surface)
+
+        # bullet
+        self.bullet.update()

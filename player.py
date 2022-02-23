@@ -1,5 +1,6 @@
 import pygame
 import math
+from bullet import Bullet
 
 
 class Player(pygame.sprite.Sprite):
@@ -15,10 +16,12 @@ class Player(pygame.sprite.Sprite):
         self.position = pos
         self.direction = pygame.math.Vector2(0, 0)
         self.speed = 3
+        self.shooting = False
 
     def get_input(self):
         keys = pygame.key.get_pressed()
 
+        # Movement
         if keys[pygame.K_d]:
             self.direction.y = 0
             self.direction.x = 1
@@ -34,6 +37,7 @@ class Player(pygame.sprite.Sprite):
         else:
             self.direction.x = 0
             self.direction.y = 0
+
 
     def get_player_orientation(self):
         keys = pygame.key.get_pressed()
