@@ -3,6 +3,7 @@ from tiles import Tile
 from settings import tile_size
 from player import Player
 from police import Police
+from bullet import Bullet
 
 
 class Level:
@@ -30,6 +31,8 @@ class Level:
                 if cell == "3":
                     police_sprite = Police((x, y))
                     self.police.add(police_sprite)
+        bullet_sprite = Bullet(100, 100, 7, "Green", 1, (100, 100))
+        self.bullet.add(bullet_sprite)
 
     def movement_collision(self):
         player = self.player.sprite
@@ -70,3 +73,5 @@ class Level:
 
         # bullet
         self.bullet.update()
+        if self.bullet.sprite.shooting == True:
+            self.bullet.draw(self.display_surface)
